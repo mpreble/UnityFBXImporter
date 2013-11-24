@@ -1,1 +1,43 @@
-Hello World!
+Mathias Preble's Unity run-time FBX importer
+
+Alright, inside the Source folder are 4 C# files:
+
+FBXImporter.cs:
+This is the meat of the project. It reads .fbx files made from Autodesk Maya
+(it should work with 3ds Max too, but I need to test more), and builds Unity
+game objects out of them. These game objects also include the pivot points
+and parent hierarchy that was set up in Maya. Be sure that when exporting the
+fbx from Maya, you export it as an ASCII type fbx (under Advanced Options->
+FBX File Format).
+
+I intend to expand the script to also import FBX files from Blender. Blender
+uses an older version of FBX, meaning the output data is slightly different.
+
+Also, the importer was tested using Maya 2013. I need to test FBX files from
+2014 still.
+
+Utilities.cs:
+This file simply contains a few utility functions for parsing the FBX file.
+They're more customized functions for reading strings basically.
+
+TextureImporter.cs:
+Since the fbx importer also imports UVs, I also included this short
+script which imports .jpg files which you can use for textures.
+
+BuildDefinitions.cs:
+This file contains list references for all the models you import.
+Basically what happens is the FBXImporter reads in the models,
+builds the game objects out of them, and then adds the root object
+to the modelDefinitions in the BuildDefinitions script. Then whenever
+you need to access a specific model, search for it by file name (without
+the .fbx) in the modelDefinitions list. Similarly, textures are stored in
+a list in this file. Everything should be stored by file name short the extension.
+
+
+Final point: NONE OF THESE SCRIPTS WORK ON THEIR OWN! To get this to work, you need
+another script file that calls the relevant functions:
+ImportAllFBX(); // from an instance of the FBXImporter
+ImportAllJPG(); // from an instance of the TextureImporter
+
+This is because Start() is an unreliable function to get things to work in the right way.
+I actually had a very specific bug, but I can't remember what it was.
