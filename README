@@ -1,5 +1,12 @@
 Mathias Preble's Unity run-time FBX importer
 
+The Importers expect that your ASCII .fbx files are in a Models folder
+and your .jpg files are in a Texture folder respectively. These folders
+are in your Assets folder when working in the editor, or I believe in your
+game_Data folder after a build. Also since this is importing at run time, there's
+no real reason to compile your models and textures when building a solution from Unity.
+
+
 Alright, inside the Source folder are 4 C# files:
 
 FBXImporter.cs:
