@@ -1285,7 +1285,15 @@ public class FBXImporter : MonoBehaviour{
 			vc = new VertexClass();
 			vc.pos = verts[polyVerts[i]];
 			vc.uv = uvs[uvIndex[i]];
-			vc.norm = norms[i];
+			
+			if(norms.Length == verts.Length)
+			{
+				vc.norm = norms[polyVerts[i]];
+			} // if
+			else
+			{
+				vc.norm = norms[i]; //HERE
+			}
 			
 			if(vList.Count<1)
 			{
